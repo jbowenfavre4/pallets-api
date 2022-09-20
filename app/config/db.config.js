@@ -1,6 +1,9 @@
+require('dotenv').config()
+
+
 module.exports = {
-    HOST: 'sql3.freemysqlhosting.net',
-    USER: 'sql3516850',
-    PASSWORD: 'PNBzNIIhwF',
-    DB: 'sql3516850'
+    HOST: process.env.DB_HOST,
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_DB
 }
