@@ -52,6 +52,19 @@ Item.getItemsInPallet = (palletId, result) => {
     })
 }
 
+Item.getItemsByCategory = (categoryId, result) => {
+    let query = `SELECT * FROM items WHERE category = '${categoryId}'`
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log('error: ', err)
+            result(null, err)
+            return
+        }
+        console.log(`found ${res.length} items`)
+        result(null, res)
+    })
+}
+
 Item.getItem = (itemId, result) => {
     let query = `SELECT * FROM items WHERE itemId = '${itemId}'`
     sql.query(query, (err, res) => {

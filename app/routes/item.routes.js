@@ -38,6 +38,7 @@ module.exports = app => {
             }
         })
     router.get('/:itemId', items.getItem)
+    router.get('/category/:categoryId', items.findItemsByCategory)
 
     app.use('/items', router)
 }

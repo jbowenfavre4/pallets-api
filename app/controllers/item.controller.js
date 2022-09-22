@@ -51,6 +51,18 @@ exports.findItemsInPallet = (req, res) => {
     })
 }
 
+exports.findItemsByCategory = (req, res) => {
+    Item.getItemsByCategory(req.params.categoryId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || 'an error occurred.'
+            })
+        } else {
+            res.send(data)
+        }
+    })
+}
+
 exports.getItem = (req, res) => {
     Item.getItem(req.params.itemId, (err, data) => {
         if (err) {
