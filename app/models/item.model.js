@@ -9,6 +9,9 @@ const Item = function(item) {
     this.sellDate = item.sellDate
     this.sellPrice = item.sellPrice
     this.platform = item.platform
+    this.shippingCost = item.shippingCost
+    this.miscExpenses = item.miscExpenses
+    this.listDate = item.listDate
 }
 
 Item.create = (newItem, result) => {
@@ -79,6 +82,8 @@ Item.getItem = (itemId, result) => {
 }
 
 Item.editItem = (itemId, item, result) => {
+    console.log('beginning edit item')
+    console.log(item)
     let query_string = `UPDATE items SET itemName = '${item.itemName}', 
     itemDescription = '${item.itemDescription}', 
     palletId = '${item.palletId}', 
@@ -87,7 +92,10 @@ Item.editItem = (itemId, item, result) => {
     category = '${item.category}', 
     sellDate = '${item.sellDate}', 
     sellPrice = '${item.sellPrice}', 
-    platform = '${item.platform}'
+    platform = '${item.platform}',
+    listDate = '${item.listDate}',
+    shippingCost = '${item.shippingCost}',
+    miscExpenses = '${item.miscExpenses}'
     WHERE itemId = '${itemId}'`
     console.log(query_string)
     sql.query(query_string,

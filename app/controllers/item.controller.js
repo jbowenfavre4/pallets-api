@@ -14,7 +14,10 @@ exports.create = (req, res) => {
         category: req.body.category,
         sellDate: req.body.sellDate,
         sellPrice: req.body.sellPrice,
-        platform: req.body.platform
+        platform: req.body.platform,
+        shippingCost: req.body.shippingCost,
+        listDate: req.body.listDate,
+        miscExpenses: req.body.miscExpenses
     })
     Item.create(item, (err, data) => {
         if (err) {
