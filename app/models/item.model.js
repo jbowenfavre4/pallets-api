@@ -34,7 +34,7 @@ Item.getAll = (itemName, result) => {
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err)
-            result(null, err)
+            result(err, null)
             return
         }
         console.log('items: ', res)
@@ -47,7 +47,7 @@ Item.getItemsInPallet = (palletId, result) => {
     sql.query(query, (err, res) => {
         if (err) {
             console.log('error: ', err)
-            result(null, err)
+            result(err, null)
             return
         }
         console.log(`found ${res.length} items`)
@@ -60,7 +60,7 @@ Item.getItemsByCategory = (categoryId, result) => {
     sql.query(query, (err, res) => {
         if (err) {
             console.log('error: ', err)
-            result(null, err)
+            result(err, null)
             return
         }
         console.log(`found ${res.length} items`)
@@ -76,7 +76,6 @@ Item.getItem = (itemId, result) => {
             result(null, err)
             return
         }
-        console.log(`found item: ${res}`)
         result(null, res)
     })
 }

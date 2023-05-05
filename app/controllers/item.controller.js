@@ -66,6 +66,28 @@ exports.findItemsByCategory = (req, res) => {
     })
 }
 
+exports.getProfit = (req, res) => {
+    Item.getItem(req.params.itemId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || 'an error occurred.'
+            })
+        } else if (data.length != 1) {
+            res.status(404).send({
+                messsage: 'Item not found.'
+            })
+        } else {
+            let thisItem = data[0]
+            let itemProfit = Math.round((thisItem.sellPrice - thisItem.shippingCost - thisItem.miscExpenses) * 100) / 100
+            res.send({
+                itemId: thisItem.itemId,
+                itemName: thisItem.itemName,
+                itemProfit: itemProfit
+            })
+        }
+    })
+}
+
 exports.getItem = (req, res) => {
     Item.getItem(req.params.itemId, (err, data) => {
         if (err) {
