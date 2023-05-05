@@ -82,23 +82,20 @@ Item.getItem = (itemId, result) => {
 }
 
 Item.editItem = (itemId, item, result) => {
-    console.log('beginning edit item')
-    console.log(item)
-    let query_string = `UPDATE items SET itemName = '${item.itemName}', 
-    itemDescription = '${item.itemDescription}', 
-    palletId = '${item.palletId}', 
-    itemPrice = '${item.itemPrice}', 
-    sold = '${item.sold}', 
-    category = '${item.category}', 
-    sellDate = '${item.sellDate}', 
-    sellPrice = '${item.sellPrice}', 
-    platform = '${item.platform}',
-    listDate = '${item.listDate}',
-    shippingCost = '${item.shippingCost}',
-    miscExpenses = '${item.miscExpenses}'
-    WHERE itemId = '${itemId}'`
-    console.log(query_string)
-    sql.query(query_string,
+    sql.execute(`UPDATE items SET itemName = ?, 
+    itemDescription = ?, 
+    palletId = ?, 
+    itemPrice = ?, 
+    sold = ?, 
+    category = ?, 
+    sellDate = ?, 
+    sellPrice = ?, 
+    platform = ?,
+    listDate = ?,
+    shippingCost = ?,
+    miscExpenses = ?
+    WHERE itemId = ?`,
+    [item.itemName, item.itemDescription, item.palletId, item.itemPrice, item.sold, item.category, item.sellDate, item.sellPrice, item.platform, item.listDate, item.shippingCost, item.miscExpenses, itemId],
     (err, res) => {
         if (err) {
             console.log('error: ', err)
@@ -106,11 +103,9 @@ Item.editItem = (itemId, item, result) => {
             return
         }
         if (res.affectedRows === 0) {
-            console.log('no item found')
             result('not found', null)
             return
         }
-        console.log('updated item: ', {id: itemId, ...item})
         result(null, {id: itemId, ...item})
     })
 }
