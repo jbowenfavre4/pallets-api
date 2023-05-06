@@ -69,13 +69,7 @@ Pallet.findOne = (palletId, result) => {
             result (err, null)
             return
         }
-        if (res.length) {
-            console.log('found pallet: ', res[0])
-            result(null, res[0])
-            return
-        }
-        result('no pallet found', null)
-        return
+        result(null, res)
     })
 }
 module.exports = Pallet

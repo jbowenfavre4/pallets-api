@@ -1,4 +1,5 @@
 const Item = require('../models/item.model.js')
+const financeService = require('../services/finances.js')
 exports.create = (req, res) => {
     if (!req.body) {
         res.status(400).send({
@@ -78,7 +79,7 @@ exports.getProfit = (req, res) => {
             })
         } else {
             let thisItem = data[0]
-            let itemProfit = Math.round((thisItem.sellPrice - thisItem.shippingCost - thisItem.miscExpenses) * 100) / 100
+            let itemProfit = financeService.getItemProfit(thisItem)
             res.send({
                 itemId: thisItem.itemId,
                 itemName: thisItem.itemName,
