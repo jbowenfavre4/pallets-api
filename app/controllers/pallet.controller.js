@@ -65,7 +65,7 @@ exports.findOne = (req, res) => {
             res.status(500).send({
                 message: err.message || 'An error occurred.'
             })
-        } else if (res.length != 1) {
+        } else if (data.length != 1) {
             res.status(404).send({
                 message: 'Pallet not found.'
             })
