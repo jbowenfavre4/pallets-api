@@ -69,7 +69,7 @@ exports.findOne = (req, res) => {
             res.status(404).send({
                 message: 'Pallet not found.'
             })
-        } else res.send(data)
+        } else res.send(data[0])
     })
 }
 
