@@ -102,3 +102,35 @@ exports.getProfit = (req, res) => {
         }
     })
 }
+
+exports.getTotalProfit = (req, res) => {
+    Pallet.getAll(null, (err, pallets) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || 'An error occurred.'
+            })
+        } else if (pallets.length < 1) {
+            res.status(404).send({
+                message: 'no pallets found.'
+            })
+        } else {
+            let totalCost = financeService.getTotalCost(pallets)
+            Item.getAll(false, (err, items) => {
+                if (err) {
+                    res.status(500).send({
+                        message: err.message || 'An error occurred.'
+                    })
+                } else if (items.length < 1) {
+                    res.status(404).send({
+                        message: 'no items found.'
+                    })
+                } else {
+                    let revenue = financeService.getPalletProfit(items)
+                    res.send({
+                        totalProfit: `${Math.round((revenue - totalCost) * 100) / 100}`
+                    })
+                }
+            })
+        }
+    })
+}

@@ -37,7 +37,6 @@ Item.getAll = (itemName, result) => {
             result(err, null)
             return
         }
-        console.log('items: ', res)
         result(null, res)
     })
 }

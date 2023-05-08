@@ -22,8 +22,10 @@ module.exports = app => {
     router.get('/', pallets.findAll)
     router.get('/active', pallets.findAllActve)
     router.get('/dropdown', pallets.getDropdownInfo)
+    router.get('/totalProfit', pallets.getTotalProfit)
     router.get('/:palletId', pallets.findOne)
     router.get('/profit/:palletId', pallets.getProfit)
+    
     app.use('/pallets', router)
     
     

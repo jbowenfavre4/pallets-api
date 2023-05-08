@@ -6,7 +6,7 @@ module.exports = {
                 itemProfits = itemProfits + this.getItemProfit(item)
             }
         }
-        return itemProfits
+        return Math.round(itemProfits * 100) / 100
     },
 
     getItemProfit: function (item) {
@@ -21,6 +21,14 @@ module.exports = {
             itemProfits = itemProfits - Number(item.miscExpenses)
         }
         return Math.round(itemProfits * 100) / 100
+    },
+
+    getTotalCost: function (pallets) {
+        let cost = 0
+        for (let pallet of pallets) {
+            cost += Number(pallet.purchasePrice)
+        }
+        return Math.round(cost * 100) / 100
     }
 }
 

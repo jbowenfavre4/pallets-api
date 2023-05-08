@@ -28,7 +28,6 @@ Pallet.getAll = (palletName, result) => {
             result(null, err)
             return
         }
-        console.log('pallets: ', res)
         result(null, res)
     })
 }
