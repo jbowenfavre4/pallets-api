@@ -29,6 +29,14 @@ module.exports = {
             cost += Number(pallet.purchasePrice)
         }
         return Math.round(cost * 100) / 100
+    },
+
+    getTotalShipping: function (items) {
+        let cost = 0
+        for (let item of items) {
+            cost += Number(item.shippingCost)
+        }
+        return Math.round(cost * 100) / 100
     }
 }
 

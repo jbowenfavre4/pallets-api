@@ -25,6 +25,7 @@ module.exports = app => {
     router.get('/totalProfit', pallets.getTotalProfit)
     router.get('/:palletId', pallets.findOne)
     router.get('/profit/:palletId', pallets.getProfit)
+    router.get('/shipping/:palletId', pallets.getShippingCost)
     
     app.use('/pallets', router)
     

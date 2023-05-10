@@ -134,3 +134,21 @@ exports.getTotalProfit = (req, res) => {
         }
     })
 }
+
+exports.getShippingCost = (req, res) => {
+    Item.getItemsInPallet(req.params.palletId, (err, items) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || 'An error occurred.'
+            })
+        } else if (items.length < 1) {
+            res.status(404).send({
+                message: 'No items found.'
+            })
+        } else {
+            res.send({
+                totalShippingCost: financeService.getTotalShipping(items)
+            })
+        }
+    })
+}
