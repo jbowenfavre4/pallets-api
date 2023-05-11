@@ -188,3 +188,39 @@ exports.getRevenue = (req, res) => {
         }
     })
 }
+
+exports.getPalletNumbers = (req, res) => {
+    Pallet.findOne(req.params.palletId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || 'An error occurred.'
+            })
+        } else if (data.length != 1) {
+            res.status(404).send({
+                message: 'Pallet not found.'
+            })
+        } else {
+            let cost = Number(data[0].purchasePrice)
+            Item.getItemsInPallet(req.params.palletId, (err, items) => {
+                if (err) {
+                    res.status(500).send({
+                        message: err.message || 'An error occurred.'
+                    })
+                } else if (items.length < 1) {
+                    res.status(404).send({
+                        message: 'No items found.'
+                    })
+                } else {
+                    res.send({
+                        palletId: req.params.palletId,
+                        cost: cost,
+                        totalShippingCost: financeService.getTotalShipping(items),
+                        totalMiscExpenses: financeService.getTotalMiscExpenses(items),
+                        revenue: financeService.getRevenue(items),
+                        profit: Math.round((financeService.getPalletProfit(items) - cost) * 100) / 100
+                    })
+                }
+            })
+        }
+    })
+}
