@@ -37,6 +37,22 @@ module.exports = {
             cost += Number(item.shippingCost)
         }
         return Math.round(cost * 100) / 100
+    },
+
+    getTotalMiscExpenses: function (items) {
+        let cost = 0
+        for (let item of items) {
+            cost += Number(item.miscExpenses)
+        }
+        return Math.round(cost * 100) / 100
+    },
+
+    getRevenue: function (items) {
+        let rev = 0
+        for (let item of items) {
+            rev += Number(item.sellPrice)
+        }
+        return Math.round(rev * 100) / 100
     }
 }
 
